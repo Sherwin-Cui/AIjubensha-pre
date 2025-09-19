@@ -1,0 +1,70 @@
+y<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>萨勒密小镇谋杀案 - AVG</title>
+    <link rel="stylesheet" href="../../style_cinema.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- 背景层 -->
+        <div id="background" class="background-layer"></div>
+        
+        <!-- 章节标题 -->
+        <div id="chapter-title" class="chapter-title"></div>
+        
+        <!-- 背包按钮 -->
+        <button id="backpack-btn" class="backpack-btn">
+            <span class="backpack-icon">🎒</span>
+            <span id="clue-count" class="clue-count">0</span>
+        </button>
+        
+        <!-- 角色立绘层 -->
+        <div id="character-layer" class="character-layer">
+            <div id="character-portrait" class="character-portrait"></div>
+        </div>
+        
+        <!-- 对话框 -->
+        <div id="dialogue-box" class="dialogue-box">
+            <div id="character-name" class="character-name"></div>
+            <div id="dialogue-text" class="dialogue-text"></div>
+            <div id="click-hint" class="click-hint">点击继续 ▶</div>
+        </div>
+        
+        <!-- 线索弹窗 -->
+        <div id="clue-popup" class="clue-popup hidden">
+            <div class="clue-content">
+                <h3>发现线索！</h3>
+                <h4 id="clue-title"></h4>
+                <p id="clue-description"></p>
+                <button onclick="closeCluePopup()">收集</button>
+            </div>
+        </div>
+        
+        <!-- 背包界面 -->
+        <div id="backpack-panel" class="backpack-panel hidden">
+            <div class="backpack-content">
+                <h2>线索背包</h2>
+                <div id="clues-list" class="clues-list"></div>
+                <button onclick="closeBackpack()">关闭</button>
+            </div>
+        </div>
+        
+        <!-- 场景切换提示 -->
+        <div id="scene-transition" class="scene-transition hidden">
+            <h2 id="scene-text"></h2>
+        </div>
+        
+        <!-- 开始界面 -->
+        <div id="start-screen" class="start-screen">
+            <h1>萨勒密小镇谋杀案</h1>
+            <p>1666年的神秘事件</p>
+            <button onclick="startGame()">开始游戏</button>
+        </div>
+    </div>
+    
+    <script src="../../data.js"></script>
+    <script src="../../game.js"></script>
+</body>
+</html>

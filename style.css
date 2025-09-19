@@ -1,0 +1,355 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    overflow: hidden;
+    background: #000;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 背景层 */
+.background-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #2c1810 0%, #1a0e08 100%);
+    transition: background 1s ease;
+}
+
+/* 章节标题 */
+.chapter-title {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    color: #fff;
+    font-size: 18px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    opacity: 0.9;
+    z-index: 10;
+}
+
+/* 背包按钮 */
+.backpack-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.6);
+    border: 2px solid #d4af37;
+    color: #d4af37;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 20;
+    transition: transform 0.2s;
+}
+
+.backpack-btn:active {
+    transform: scale(0.95);
+}
+
+.clue-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #c9302c;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 角色立绘层 */
+.character-layer {
+    position: absolute;
+    width: 100%;
+    height: 60%;
+    top: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.character-portrait {
+    width: 200px;
+    height: 300px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 100px;
+    color: rgba(255,255,255,0.3);
+    transition: all 0.3s ease;
+}
+
+/* 对话框 */
+.dialogue-box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 35%;
+    background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.95) 100%);
+    border-top: 2px solid #d4af37;
+    padding: 20px;
+    color: white;
+}
+
+.character-name {
+    font-size: 20px;
+    color: #d4af37;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.dialogue-text {
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 80px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.click-hint {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    color: #d4af37;
+    font-size: 14px;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* 线索弹窗 */
+.clue-popup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.clue-content {
+    background: linear-gradient(135deg, #2c1810 0%, #4a2410 100%);
+    border: 3px solid #d4af37;
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 80%;
+    text-align: center;
+    color: white;
+}
+
+.clue-content h3 {
+    color: #d4af37;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.clue-content h4 {
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.clue-content p {
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.clue-content button {
+    background: #d4af37;
+    color: #000;
+    border: none;
+    padding: 10px 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* 背包界面 */
+.backpack-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 90;
+}
+
+.backpack-content {
+    background: #1a0e08;
+    border: 2px solid #d4af37;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 90%;
+    max-height: 80%;
+    overflow-y: auto;
+    color: white;
+}
+
+.backpack-content h2 {
+    color: #d4af37;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.clues-list {
+    margin-bottom: 20px;
+}
+
+.clue-item {
+    background: rgba(212,175,55,0.1);
+    border: 1px solid #d4af37;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.clue-item h4 {
+    color: #d4af37;
+    margin-bottom: 5px;
+}
+
+.backpack-content button {
+    display: block;
+    margin: 0 auto;
+    background: #d4af37;
+    color: #000;
+    border: none;
+    padding: 10px 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* 场景切换 */
+.scene-transition {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 80;
+}
+
+.scene-transition h2 {
+    color: #d4af37;
+    font-size: 28px;
+    text-align: center;
+    animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 开始界面 */
+.start-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, #2c1810 0%, #1a0e08 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    color: white;
+}
+
+.start-screen h1 {
+    color: #d4af37;
+    font-size: 32px;
+    margin-bottom: 10px;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+}
+
+.start-screen p {
+    font-size: 18px;
+    margin-bottom: 40px;
+    opacity: 0.8;
+}
+
+.start-screen button {
+    background: #d4af37;
+    color: #000;
+    border: none;
+    padding: 15px 40px;
+    font-size: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.start-screen button:active {
+    transform: scale(0.95);
+}
+
+/* 隐藏类 */
+.hidden {
+    display: none !important;
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+    .dialogue-box {
+        height: 40%;
+    }
+    
+    .character-portrait {
+        width: 150px;
+        height: 225px;
+        font-size: 80px;
+    }
+    
+    .dialogue-text {
+        font-size: 15px;
+    }
+    
+    .character-name {
+        font-size: 18px;
+    }
+}
